@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mr. Pengi and the Super-Duper Slide</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="256x256" href="images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f5efe0;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      color: #2c2416;
+      font-family: 'Lora', 'Georgia', serif;
+      font-size: 1.15rem;
+      line-height: 1.85;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .book {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    /* ── Title ── */
+    .title-section {
+      text-align: center;
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid #d4c9b0;
+      margin-bottom: 3rem;
+    }
+
+    .title-section h1 {
+      font-family: 'Playfair Display', 'Georgia', serif;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 700;
+      color: #1a3a4a;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .title-section .subtitle {
+      font-family: 'Playfair Display', 'Georgia', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #7a6e5d;
+      letter-spacing: 0.02em;
+    }
+
+    .social-links {
+      margin-top: 0.8rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      color: #7a6e5d;
+      text-decoration: none;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .social-links a:hover {
+      color: #1a3a4a;
+    }
+
+    .title-ornament {
+      display: block;
+      margin: 1.5rem auto 0;
+      font-size: 1.4rem;
+      color: #c4a96a;
+      letter-spacing: 0.5em;
+    }
+
+    /* ── Chapters ── */
+    .chapter {
+      margin-bottom: 3rem;
+    }
+
+    .chapter h2 {
+      font-family: 'Playfair Display', 'Georgia', serif;
+      font-size: clamp(1.4rem, 4vw, 1.9rem);
+      font-weight: 700;
+      color: #1a3a4a;
+      text-align: center;
+      margin: 3rem 0 1.8rem;
+      line-height: 1.3;
+    }
+
+    .chapter h2::before,
+    .chapter h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: #c4a96a;
+      margin: 0 auto 0.8rem;
+    }
+
+    .chapter h2::after {
+      margin: 0.8rem auto 0;
+    }
+
+    .chapter p {
+      margin-bottom: 1.2rem;
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    .chapter p strong {
+      color: #1a3a4a;
+      font-weight: 600;
+    }
+
+    .chapter p code {
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      background: #e8dfc9;
+      padding: 0.1em 0.4em;
+      border-radius: 3px;
+    }
+
+    /* ── Drop cap ── */
+    .drop-cap::first-letter {
+      font-family: 'Playfair Display', 'Georgia', serif;
+      float: left;
+      font-size: 3.8em;
+      line-height: 0.8;
+      padding-right: 0.08em;
+      margin-top: 0.05em;
+      color: #1a3a4a;
+      font-weight: 700;
+    }
+
+    /* ── Blockquote ── */
+    blockquote {
+      margin: 1.8rem 0;
+      padding: 1.2rem 1.5rem;
+      background: #faf6ed;
+      border-left: 4px solid #c4a96a;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+    }
+
+    blockquote em {
+      font-style: normal;
+    }
+
+    /* ── Images ── */
+    .illustration {
+      margin: 2.2rem 0;
+      text-align: center;
+    }
+
+    .illustration img {
+      max-width: 70%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 6px 24px rgba(44, 36, 22, 0.15);
+    }
+
+    .illustration figcaption {
+      font-size: 0.85rem;
+      color: #8a7e6d;
+      font-style: italic;
+      margin-top: 0.6rem;
+    }
+
+    /* ── Shout / Whistle ── */
+    .shout {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #8b2e1a;
+      margin: 1.5rem 0;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      text-align: center;
+      margin: 3rem 0;
+      font-size: 1.2rem;
+      color: #c4a96a;
+      letter-spacing: 0.6em;
+    }
+
+    /* ── Moral ── */
+    .moral {
+      margin-top: 3rem;
+      padding: 2rem 1.8rem;
+      background: #eee8d6;
+      border-radius: 12px;
+      border: 1px solid #d4c9b0;
+    }
+
+    .moral h2 {
+      font-family: 'Playfair Display', 'Georgia', serif;
+      font-size: 1.5rem;
+      color: #1a3a4a;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .moral h2::before,
+    .moral h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: #c4a96a;
+      margin: 0 auto 0.8rem;
+    }
+
+    .moral h2::after {
+      margin: 0.8rem auto 0;
+    }
+
+    .moral ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .moral li {
+      margin-bottom: 1.2rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .moral li::before {
+      content: '\2726';
+      position: absolute;
+      left: 0;
+      color: #c4a96a;
+    }
+
+    .moral li strong {
+      color: #1a3a4a;
+    }
+
+    .moral li code {
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      background: #ddd6c1;
+      padding: 0.1em 0.4em;
+      border-radius: 3px;
+    }
+
+    /* ── Footer ── */
+    .colophon {
+      text-align: center;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid #d4c9b0;
+      font-size: 0.85rem;
+      color: #8a7e6d;
+      font-style: italic;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      body {
+        font-size: 1.05rem;
+        line-height: 1.75;
+      }
+
+      .book {
+        padding: 2rem 1.2rem 3rem;
+      }
+
+      .title-section {
+        padding: 2.5rem 0 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .illustration img {
+        max-width: 90%;
+      }
+
+      .chapter p {
+        text-align: left;
+      }
+
+      .moral {
+        padding: 1.5rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<article class="book">
+
+  <!-- Title -->
+  <header class="title-section">
+    <h1>Mr.&nbsp;Pengi and the Super&#8209;Duper&nbsp;Slide</h1>
+    <p class="subtitle">The Linux Completely Fair Scheduler &amp; CPU Quotas, explained simply</p>
+    <p class="subtitle" style="margin-top: 1.2rem;">by Per Arneng</p>
+    <p class="social-links">
+      <a href="https://x.com/per_arneng" target="_blank" rel="noopener" title="X (Twitter)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://bsky.app/profile/perarneng.bsky.social" target="_blank" rel="noopener" title="Bluesky">
+        <svg width="20" height="18" viewBox="0 0 568 501" fill="currentColor"><path d="M123.121 33.664C188.241 82.553 258.281 181.68 284 234.873c25.719-53.192 95.759-152.32 160.879-201.21C491.866-1.611 568-28.906 568 57.947c0 17.346-9.945 145.713-15.778 166.555-20.275 72.453-94.155 90.933-159.875 79.748C507.222 323.8 536.444 388.56 473.333 453.32c-119.86 122.992-172.272-30.859-185.702-70.281-2.462-7.227-3.614-10.608-3.631-7.733-.017-2.875-1.169.506-3.631 7.733-13.43 39.422-65.842 193.273-185.702 70.281-63.111-64.76-33.889-129.52 80.986-149.071-65.72 11.185-139.6-7.295-159.875-79.748C9.945 203.659 0 75.291 0 57.946 0-28.906 76.135-1.612 123.121 33.664z"/></svg>
+      </a>
+    </p>
+    <span class="title-ornament">&diams; &diams; &diams;</span>
+  </header>
+
+  <!-- Chapter 1 -->
+  <section class="chapter">
+    <h2>Chapter 1<br>Mr. Pengi and the Super-Duper Slide</h2>
+
+    <figure class="illustration">
+      <img src="images/1.jpeg" alt="Mr. Pengi standing at the bottom of the Super-Duper Slide holding his clipboard">
+    </figure>
+
+    <p class="drop-cap">Once upon a time, at the very center of the Silicon Playground, there was a magnificent, shiny playground slide called <strong>The CPU</strong>. It was the fastest, most fun slide in the world, but there was a catch: only one kid could go down the slide at a time.</p>
+
+    <p>To make sure nobody fought over the slide, the school principal hired a very organized teacher named <strong>Mr. Pengi</strong> (who was, in fact, a penguin). Mr. Pengi had a special set of rules called the <strong>Completely Fair Scheduler</strong>, or <strong>CFS</strong> for short.</p>
+
+    <figure class="illustration">
+      <img src="images/2.jpeg" alt="Mr. Pengi showing a bar chart on his clipboard to a curious boy">
+    </figure>
+
+    <p>Mr. Pengi held a magical clipboard with a stopwatch. His rule was simple and incredibly fair:</p>
+
+    <blockquote>
+      &ldquo;The kid who has spent the least amount of total time on the slide gets to go next!&rdquo;
+    </blockquote>
+
+    <p>If someone had barely played, Mr. Pengi made sure they got to jump right in so they could catch up to the others. Because Mr. Pengi was always calculating who had the least amount of &ldquo;Slide Time,&rdquo; everyone got a wonderfully equal chance to play. This is how normal scheduling works!</p>
+  </section>
+
+  <!-- Chapter 2 -->
+  <section class="chapter">
+    <h2>Chapter 2<br>The Two Teams</h2>
+
+    <figure class="illustration">
+      <img src="images/3.jpeg" alt="A confident boy in red and a girl with braids posing in front of the tall slide">
+    </figure>
+
+    <p class="drop-cap">One sunny Tuesday, a giant field trip arrived. The kids were divided into two groups: the <strong>Blue Shirts</strong> and the <strong>Red Shirts</strong>.</p>
+
+    <p>At first, Mr. Pengi just treated them all as individual kids. But then, the teachers realized they needed to organize things better. They put the kids into <strong>cgroups</strong> (Control Groups). They told Mr. Pengi, &ldquo;Treat the Blue Shirts as one big group, and the Red Shirts as another big group. Make sure the groups share the slide fairly!&rdquo;</p>
+
+    <figure class="illustration">
+      <img src="images/4.jpeg" alt="Mr. Pengi greeting the boy as he steps up to the slide staircase">
+    </figure>
+
+    <p>So, Mr. Pengi adjusted his clipboard. If the Red Shirts had been using the slide a lot, he would tell the whole Red Shirt line to wait and let the Blue Shirts have a turn. If the Blue Shirts went to eat lunch, the Red Shirts were allowed to use the slide 100% of the time because the slide was empty! Why let a good slide go to waste?</p>
+  </section>
+
+  <!-- Chapter 3 -->
+  <section class="chapter">
+    <h2>Chapter 3<br>The Strict Park Pass</h2>
+
+    <figure class="illustration">
+      <img src="images/5.jpeg" alt="A teacher in a red blazer explaining a lesson while Mr. Pengi listens">
+    </figure>
+
+    <p class="drop-cap">After lunch, the Red Shirts&rsquo; teacher noticed her students were getting way too sweaty and ignoring their homework. She marched up to Mr. Pengi and said, &ldquo;We are setting a strict rule. The Red Shirts are now on a <strong>Quota</strong> (<code>cfs_quota_us</code>). As a team, they are only allowed to use the slide for a total of exactly 10 minutes out of every hour (<code>cfs_period_us</code>).&rdquo;</p>
+
+    <p>Mr. Pengi nodded and updated his magic clipboard. The hour started.</p>
+
+    <p>Now, within the Red Shirt group, there were two very different kids. There was <strong>Little Timmy</strong>, who was a speedster. He dashed up the stairs and zoomed down, over and over, as fast as his legs could carry him. Then there was <strong>Little Berta</strong>. Berta liked to take her time. She climbed the steps slowly, held onto the railings, and enjoyed the view before finally sliding down.</p>
+
+    <p>Mr. Pengi was still fair within the Red Shirt group&mdash;he always checked whose turn it was next. But every time he called Berta&rsquo;s name, she was still slowly climbing the stairs. &ldquo;Berta&rsquo;s not ready&mdash;Timmy, you go again!&rdquo; And Timmy, always waiting eagerly at the bottom, dashed right back up and zoomed down once more.</p>
+
+    <figure class="illustration">
+      <img src="images/6.jpeg" alt="The boy in red zooming down the slide with a big grin">
+    </figure>
+
+    <p>Because they shared the team&rsquo;s 10-minute quota, every second Timmy spent on the slide counted against the whole team. By the time Berta finished her first slow ride, Timmy had already gone twenty times.</p>
+
+    <figure class="illustration">
+      <img src="images/7.jpeg" alt="The girl with braids sitting at the top of the slide ready to go down">
+    </figure>
+
+    <p>Berta was just reaching the top of the stairs for her second ride when&mdash;</p>
+
+    <figure class="illustration">
+      <img src="images/8.jpeg" alt="Mr. Pengi blowing his whistle while the girl looks at him by the slide">
+    </figure>
+
+    <p class="shout">&ldquo;TWEET!&rdquo; Mr. Pengi blew his whistle.<br>&ldquo;Red Shirts, your team&rsquo;s quota is up! You are now Throttled!&rdquo;</p>
+
+    <p>&ldquo;What?!&rdquo; cried Berta, her lower lip trembling. &ldquo;But I only got to ride <em>once!</em> Mr. Pengi kept calling my name, but I was still climbing! Timmy was always ready, so he went twenty times and used up all our team&rsquo;s time!&rdquo; Berta was very sad and frustrated. Mr. Pengi had been perfectly fair&mdash;he&rsquo;d offered her every other turn. But because she was slow and Timmy was always waiting, Timmy naturally burned through the team&rsquo;s quota. And now the strict team limit had completely run out, overriding everything else.</p>
+
+    <p>The entire Red Shirt team had to go sit on the park benches.</p>
+
+    <p>A few minutes later, the Blue Shirts decided they were tired of the slide and went to play on the swings. <strong>The Super-Duper Slide was completely empty.</strong></p>
+
+    <p>Timmy and Berta looked at the shiny, unused slide. They ran up to Mr. Pengi. &ldquo;Mr. Pengi!&rdquo; they complained together. &ldquo;The slide is just sitting there empty! Nobody is using it at all! Can we please go down?&rdquo;</p>
+
+    <p>Mr. Pengi looked at his clipboard, then shook his head. &ldquo;I&rsquo;m sorry. Under normal CFS rules, I would let you play because the slide is idle. But your teacher gave your group a <strong>Quota</strong>. Your group has used its 10 minutes for this hour (<code>cfs_period_us</code>). Even though the slide is empty, you are not allowed back on until the giant playground clock strikes the next hour.&rdquo;</p>
+
+    <p>So, Berta sat on the bench feeling cheated by Timmy, and the rest of the team grumbled about the empty slide, learning a very hard lesson about how strict team limits work.</p>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider">&ast; &ast; &ast;</div>
+
+  <!-- Moral -->
+  <section class="moral">
+    <h2>The Moral of the Story</h2>
+
+    <figure class="illustration">
+      <img src="images/9.jpeg" alt="Mr. Pengi holding his clipboard in the park with a smaller penguin peeking from behind">
+    </figure>
+
+    <ul>
+      <li><strong>The Noisy Neighbor Problem (Timmy vs. Berta):</strong> When you apply a <code>cfs_quota_us</code> to a cgroup, all processes (threads) inside that group share that quota. CFS is still fair within the group&mdash;it offers each thread its turn. But a CPU-hungry thread that&rsquo;s always ready to run (Timmy) naturally consumes far more quota than an I/O-bound thread that spends most of its time waiting (Berta). The result: the hungry thread burns through the shared quota, and the whole group gets throttled&mdash;starving the quiet threads that only needed a tiny bit of CPU time.</li>
+      <li><strong>Wasted Resources (The Empty Slide):</strong> A quota is a <strong>hard limit</strong>. Once the quota is exhausted for the period (<code>cfs_period_us</code>), the scheduler will absolutely refuse to let those processes run until the next period starts. It will strictly enforce this rule, <strong>even if the CPU is sitting at 0% usage and doing absolutely nothing else.</strong></li>
+      <li><strong>A Small Relief &mdash; Burst Quota:</strong> Since Linux 5.14, there is <code>cfs_burst_us</code>, which lets a cgroup bank unused quota from previous periods and spend it in a burst later. If the Red Shirts had been sitting quietly for a few periods, they could have saved up extra slide time for when they really needed it. This helps smooth out occasional spikes, but it doesn&rsquo;t solve the fundamental problem&mdash;a consistently hungry Timmy will still drain whatever quota is available, banked or not.</li>
+    </ul>
+  </section>
+
+  <footer class="colophon">
+    <span class="title-ornament">&diams; &diams; &diams;</span>
+    <p style="margin-top: 1rem;">The End</p>
+    <p style="margin-top: 1rem;"><a href="https://en.wikipedia.org/wiki/Completely_Fair_Scheduler" target="_blank" rel="noopener" style="color: #7a6e5d; text-decoration: underline;">Read more about the Completely Fair Scheduler on Wikipedia</a></p>
+  </footer>
+
+</article>
+
+</body>
+</html>
