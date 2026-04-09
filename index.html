@@ -57,6 +57,17 @@
       letter-spacing: 0.02em;
     }
 
+    .scope-note {
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      color: #7a6e5d;
+      font-style: italic;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
     .social-links {
       margin-top: 0.8rem;
       display: flex;
@@ -343,6 +354,7 @@
       </a>
     </p>
     <span class="title-ornament">&diams; &diams; &diams;</span>
+    <p class="scope-note">This story explains the Linux CFS quota mechanism that Kubernetes uses by default to enforce CPU limits &mdash; not the full internals of the Linux scheduler.</p>
   </header>
 
   <!-- Chapter 1 -->
@@ -451,6 +463,7 @@
       <li><strong>The Noisy Neighbor Problem (Timmy vs. Berta):</strong> When you apply a <code>cfs_quota_us</code> to a cgroup, all processes (threads) inside that group share that quota. CFS is still fair within the group&mdash;it offers each thread its turn. But a CPU-hungry thread that&rsquo;s always ready to run (Timmy) naturally consumes far more quota than an I/O-bound thread that spends most of its time waiting (Berta). The result: the hungry thread burns through the shared quota, and the whole group gets throttled&mdash;starving the quiet threads that only needed a tiny bit of CPU time.</li>
       <li><strong>Wasted Resources (The Empty Slide):</strong> A quota is a <strong>hard limit</strong>. Once the quota is exhausted for the period (<code>cfs_period_us</code>), the scheduler will absolutely refuse to let those processes run until the next period starts. It will strictly enforce this rule, <strong>even if the CPU is sitting at 0% usage and doing absolutely nothing else.</strong></li>
       <li><strong>A Small Relief &mdash; Burst Quota:</strong> Since Linux 5.14, there is <code>cfs_burst_us</code>, which lets a cgroup bank unused quota from previous periods and spend it in a burst later. If the Red Shirts had been sitting quietly for a few periods, they could have saved up extra slide time for when they really needed it. This helps smooth out occasional spikes, but it doesn&rsquo;t solve the fundamental problem&mdash;a consistently hungry Timmy will still drain whatever quota is available, banked or not.</li>
+      <li><strong>A Note on cgroup v2:</strong> This story uses the cgroup v1 names (<code>cfs_quota_us</code>, <code>cfs_period_us</code>) because they are widely known. Modern Linux distributions and Kubernetes now default to cgroup v2, where the same concepts appear through a newer API (<code>cpu.max</code>). The behavior is the same&mdash;Mr. Pengi&rsquo;s rules haven&rsquo;t changed, just the form he writes them on.</li>
     </ul>
   </section>
 
